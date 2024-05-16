@@ -14,12 +14,18 @@ export const validate = (validations) => {
         return res.status(422).json({ errors: errors.array() });
     };
 };
-export const signupValidator = [
-    body("name").notEmpty().withMessage("Nama Tidak Boleh Kosong"),
-    body("email").trim().isEmail().withMessage("Yang anda masukan bukan Email, Tolong Masukkan Email yang benar!!!"),
+export const loginValidator = [
+    body("email")
+        .trim()
+        .isEmail()
+        .withMessage("Yang anda masukan bukan Email, Tolong Masukkan Email yang benar!!!"),
     body("password")
         .trim()
         .isLength({ min: 6 })
         .withMessage("Password Harus lebih dari 6 karakter"),
+];
+export const signupValidator = [
+    body("name").notEmpty().withMessage("Nama Tidak Boleh Kosong"),
+    ...loginValidator,
 ];
 //# sourceMappingURL=validators.js.map
